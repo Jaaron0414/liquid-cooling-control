@@ -21,6 +21,21 @@ venv/
 results/
 logs/
 
+# Keep the small published Phase A experiment datasets under version control.
+!sim/phase_a_results.mat
+!sim/phase_a_results.csv
+!sim/pid_tuning_trials.mat
+!sim/pid_tuning_metrics.csv
+!sim/scope_latest.csv
+sim/.cache/
+sim/.codegen/
+sim/*_log.txt
+sim/phase_a_raw.mat
+docs/.render/
+
 # OS
 .DS_Store
 Thumbs.db
+
+# Office temporary lock files
+~$*

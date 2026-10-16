@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "tested_environment": {
+    "matlab_release": "R2026a",
+    "matlab_version": "26.1.0.3346908 Update 5",
+    "toolboxes_required": ["Simulink", "Simscape"],
+    "toolboxes_not_required_for_this_phase": ["Simscape Fluids", "Control System Toolbox", "Reinforcement Learning Toolbox"]
+  },
+  "model": "sim/liquid_cooling_phase_a.slx",
+  "model_scope": "Two-node lumped thermal plant at fixed pump flow; not a Thermal Liquid pressure/flow loop",
+  "solver": {"name": "ode23t", "maximum_step_s": 1, "relative_tolerance": 0.00001, "stop_time_s": 1800},
+  "plant": {
+    "ambient_C": 25, "target_chip_C": 40, "initial_temperature_K": 298.15,
+    "chip_mass_kg": 0.16, "chip_specific_heat_J_per_kg_K": 500,
+    "coolant_mass_kg": 0.1, "coolant_specific_heat_J_per_kg_K": 4180,
+    "chip_to_coolant_resistance_K_per_W": 0.1,
+    "radiator_equivalent_area_m2": 0.1,
+    "passive_conductance_W_per_K": 0.4, "full_fan_added_conductance_W_per_K": 5,
+    "fan_time_constant_s": 2
+  },
+  "load": {"before_W": 20, "after_W": 40, "step_time_s": 600},
+  "pid": {
+    "form": "parallel", "time_domain": "continuous", "error": "chip_C - target_C",
+    "baseline": {"P": 0.06, "I": 0.0006, "D": 0.1},
+    "saved_model_tuned": {"P": 0.24, "I": 0.0012, "D": 0.5},
+    "derivative_filter_N_per_s": 1,
+    "output_min": 0, "output_max": 1, "anti_windup": "clamping"
+  },
+  "settled_start_cross_check": {"step_time_s": 1800, "stop_time_s": 3000},
+  "metrics": {"target_C": 40, "recovery_band_C": 0.2, "recovery_time_origin": "load step", "require_remaining_in_band_until_simulation_end": true},
+  "note": "JSON is a human and machine readable snapshot. MATLAB scripts use phase_a_parameters.m and the model workspace; JSON is not automatically loaded. Parameters are teaching assumptions, not measured hardware data."
+}

@@ -1,0 +1,7 @@
+PASS: Phase A Simscape simulation
+Final chip: 39.9997 C
+Final coolant: 35.9998 C
+Final fan: 64.7201 % (heat-balance prediction 64.7273 %)
+Peak chip after load step: 43.5208 C
+Fixed-fan final chip: 54.6074 C
+Max energy residual: 0.0001 J (0.000000 % of heater input)
